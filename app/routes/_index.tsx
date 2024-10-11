@@ -30,49 +30,43 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow">
+    <div className="min-h-screen flex flex-col justify-center items-center">
+      <div className="w-full max-w-md bg-white p-8 rounded-lg">
         <h2 className="text-2xl font-bold text-center mb-6 uppercase">
-          User Login
+          Remix GPT User Login
         </h2>
         {error && (
           <div className="bg-red-100 py-4 border border-red-500 mb-4 text-red-600 text-center">
             {error}
           </div>
         )}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block font-medium">
-              Email Address
-            </label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full p-2 mt-1 border border-gray-300 rounded"
-              placeholder="Email : user@example.com"
+              placeholder="user@example.com"
               required
             />
           </div>
           <div>
-            <label htmlFor="password" className="block font-medium">
-              Password
-            </label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-2 mt-1 border border-gray-300 rounded"
-              placeholder="Pass : password"
+              placeholder="password"
               required
             />
           </div>
-          <div className="pt-5">
+          <div>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+              className="w-full bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-900 transition"
             >
               {loading ? "Loading..." : "Login"}
             </button>

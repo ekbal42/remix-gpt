@@ -4,11 +4,16 @@ import { useState } from "react";
 export default function Chat() {
   const [selectedModel, setSelectedModel] = useState("gpt-3.5");
   const [activeChat, setActiveChat] = useState(1);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const [messages, setMessages] = useState([
     { role: "user", content: "Hello!" },
-    { role: "assistant", content: "Hi there! How can I assist you?" },
+    {
+      role: "assistant",
+      content:
+        "Hi there! How can I assist you?  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, inventore.",
+    },
   ]);
   const [chats, setChats] = useState([
     { id: 1, name: "Chat 1" },
@@ -43,9 +48,15 @@ export default function Chat() {
   return (
     <div className="h-screen flex">
       {/* Sidebar */}
-      <div className=" w-0 lg:w-1/4 bg-gray-800 text-white flex flex-col">
-        <div className="p-4 flex justify-between text-xl font-normal border-b border-gray-700">
-          Conversations
+      <div
+        className={`${
+          menuOpen ? "w-full lg:w-1/4" : ""
+        } bg-gray-100 text-white flex flex-col border-r border-gray-300`}
+        style={{
+          display: menuOpen ? "flex" : "none",
+        }}
+      >
+        <div className="p-4 text-gray-900 flex justify-between text-xl font-normal border-b border-gray-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -56,7 +67,24 @@ export default function Chat() {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            className="lucide lucide-file-pen-line cursor-pointer"
+            className="lucide lucide-menu cursor-pointer"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <line x1="4" x2="20" y1="12" y2="12" />
+            <line x1="4" x2="20" y1="6" y2="6" />
+            <line x1="4" x2="20" y1="18" y2="18" />
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            className="lucide lucide-circle-plus cursor-pointer"
             onClick={() =>
               setChats((prev) => [
                 ...prev,
@@ -64,9 +92,9 @@ export default function Chat() {
               ])
             }
           >
-            <path d="m18 5-2.414-2.414A2 2 0 0 0 14.172 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2" />
-            <path d="M21.378 12.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" />
-            <path d="M8 18h1" />
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 12h8" />
+            <path d="M12 8v8" />
           </svg>
         </div>
         <div className="flex-1 overflow-auto">
@@ -76,76 +104,17 @@ export default function Chat() {
               onClick={() => setActiveChat(chat.id)}
               className={`block w-full text-left p-3 ${
                 activeChat === chat.id
-                  ? "bg-gray-700"
-                  : "hover:bg-gray-700 transition"
+                  ? "bg-gray-700 "
+                  : "hover:bg-gray-200 text-gray-900 transition"
               }`}
             >
               {chat.name}
             </button>
           ))}
         </div>
-        <button
-          className="bg-blue-600 flex gap-2 justify-center p-3 text-center w-full hover:bg-blue-500"
-          onClick={() =>
-            setChats((prev) => [
-              ...prev,
-              { id: prev.length + 1, name: `Chat ${prev.length + 1}` },
-            ])
-          }
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            className="lucide lucide-plus"
-          >
-            <path d="M5 12h14" />
-            <path d="M12 5v14" />
-          </svg>{" "}
-          New Chat
-        </button>
-      </div>
-
-      {/* Chat Area */}
-      <div className="w-full lg:w-3/4 flex flex-col justify-between bg-gray-100">
-        <div className="border-b border-gray-300 bg-white flex justify-between p-4">
-          {/* Model Selector */}
-          <div className="flex items-center">
-            <select
-              id="model-select"
-              value={selectedModel}
-              onChange={(e) => setSelectedModel(e.target.value)}
-              className="px-3 outline-none rounded appearance-none"
-            >
-              <option value="gpt-3.5">GPT-3.5</option>
-              <option value="gpt-4">GPT-4</option>
-            </select>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              className="lucide lucide-chevrons-up-down h-4 text-gray-500"
-            >
-              <path d="m7 15 5 5 5-5" />
-              <path d="m7 9 5-5 5 5" />
-            </svg>
-          </div>
+        <div className="w-full border-t border-gray-300">
           <button
-            className="flex gap-2 bg-gray-300 text-white px 
-            rounded-full px-2 py-2 shadow
-          hover:bg-blue-500 transition"
+            className="flex gap-2 justify-center text-nowrap p-3 w-full text-center text-gray-900 rounded"
             onClick={() => navigate("/")}
           >
             <svg
@@ -163,7 +132,67 @@ export default function Chat() {
               <path d="M12 2v10" />
               <path d="M18.4 6.6a9 9 0 1 1-12.77.04" />
             </svg>
+            Log Out
           </button>
+        </div>
+      </div>
+
+      {/* Chat Area */}
+      <div
+        className={`${
+          menuOpen ? "hidden lg:flex lg:w-3/4" : "w-full"
+        } flex flex-col justify-between bg-gray-100`}
+      >
+        <div className="border-b border-gray-300 bg-gray-100 flex justify-between p-4">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              className="lucide lucide-menu cursor-pointer"
+              onClick={() => setMenuOpen(!menuOpen)}
+              style={{
+                display: menuOpen ? "none" : "block",
+              }}
+            >
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
+          </div>
+          {/* Model Selector */}
+          <div className="flex items-center">
+            <select
+              id="model-select"
+              value={selectedModel}
+              onChange={(e) => setSelectedModel(e.target.value)}
+              className="px-3 outline-none rounded appearance-none bg-gray-100"
+            >
+              <option value="gpt-3.5">GPT-3.5</option>
+              <option value="gpt-4">GPT-4</option>
+            </select>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              className="lucide lucide-chevrons-up-down h-4 text-gray-500 -ml-3"
+            >
+              <path d="m7 15 5 5 5-5" />
+              <path d="m7 9 5-5 5 5" />
+            </svg>
+          </div>
         </div>
 
         <div className="p-4 overflow-auto flex-1">
@@ -183,9 +212,9 @@ export default function Chat() {
                     : ""
                 }`}
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-start gap-1">
                   {msg.role !== "user" && (
-                    <div className="border w-12 h-12 flex justify-center items-center bg-white p-2 rounded-full">
+                    <div className="-mt-3 me-2 border w-12 h-12 min-w-12 min-h-12  flex justify-center items-center bg-white p-2 rounded-full">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
