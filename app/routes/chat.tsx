@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function Chat() {
   const [selectedModel, setSelectedModel] = useState("gpt-3.5");
   const [activeChat, setActiveChat] = useState(1);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(true);
   const navigate = useNavigate();
 
   const [messages, setMessages] = useState([
@@ -46,7 +46,7 @@ export default function Chat() {
   };
 
   return (
-    <div className="h-screen flex">
+    <div className="h-screen flex bg-gray-100">
       {/* Sidebar */}
       <div
         className={`${
@@ -64,8 +64,8 @@ export default function Chat() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
+            strokeWidth="2"
+            strokeLinecap="round"
             stroke-linejoin="round"
             className="lucide lucide-menu cursor-pointer"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -81,8 +81,8 @@ export default function Chat() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
+            strokeWidth="2"
+            strokeLinecap="round"
             stroke-linejoin="round"
             className="lucide lucide-circle-plus cursor-pointer"
             onClick={() =>
@@ -124,8 +124,8 @@ export default function Chat() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
+              strokeWidth="2"
+              strokeLinecap="round"
               stroke-linejoin="round"
               className="lucide lucide-power"
             >
@@ -152,8 +152,8 @@ export default function Chat() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
+              strokeWidth="2"
+              strokeLinecap="round"
               stroke-linejoin="round"
               className="lucide lucide-menu cursor-pointer"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -184,8 +184,8 @@ export default function Chat() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
+              strokeWidth="2"
+              strokeLinecap="round"
               stroke-linejoin="round"
               className="lucide lucide-chevrons-up-down h-4 text-gray-500 -ml-3"
             >
@@ -222,8 +222,8 @@ export default function Chat() {
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
                         stroke-linejoin="round"
                         className="lucide lucide-bot mb-0.5 text-gray-500"
                       >
@@ -258,8 +258,8 @@ export default function Chat() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
+              strokeWidth="2"
+              strokeLinecap="round"
               stroke-linejoin="round"
               className="lucide lucide-paperclip"
             >
@@ -284,8 +284,8 @@ export default function Chat() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
+              strokeWidth="2"
+              strokeLinecap="round"
               stroke-linejoin="round"
               className="lucide lucide-chevron-up"
             >
